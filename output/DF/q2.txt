@@ -1,0 +1,4 @@
+Movie ID for "Cesare deve morire": 96821
+Number of ratings for "Cesare deve morire": 5096
+Average rating for "Cesare deve morire": 3.87
+Execution Time: 22.38 seconds

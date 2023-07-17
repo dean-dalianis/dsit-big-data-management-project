@@ -1,0 +1,24 @@
+Best Comedy Movies by Year:
+Year: 1996, Movie: Mars Attacks!
+Year: 1997, Movie: La vita è bella
+Year: 1998, Movie: Six Days Seven Nights
+Year: 1999, Movie: American Pie
+Year: 2000, Movie: Coyote Ugly
+Year: 2001, Movie: Monsters Inc.
+Year: 2002, Movie: Ice Age
+Year: 2003, Movie: School of Rock
+Year: 2004, Movie: Shark Tale
+Year: 2005, Movie: Charlie and the Chocolate Factory
+Year: 2006, Movie: Bandidas
+Year: 2007, Movie: Ratatouille
+Year: 2008, Movie: Kung Fu Panda
+Year: 2009, Movie: The Hangover
+Year: 2010, Movie: Grown Ups
+Year: 2011, Movie: The Hangover Part II
+Year: 2012, Movie: Ted
+Year: 2013, Movie: The Hangover Part III
+Year: 2014, Movie: Big Hero 6
+Year: 2015, Movie: Minions
+Year: 2016, Movie: Deadpool
+Year: 2017, Movie: Guardians of the Galaxy Vol. 2
+Execution Time: 38.79 seconds

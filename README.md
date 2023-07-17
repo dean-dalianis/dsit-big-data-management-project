@@ -27,6 +27,18 @@ The project description can be found [here](Project.pdf)
 | -------- | ------ |
 | 1        | Drama  |
 
+#### employeesR.csv
+
+| employee_id | name  | department_id |
+| ----------- | ----- | ------------- |
+| 1           | John  | 1             |
+
+#### departmentsR.csv
+
+| department_id | department_name |
+| ------------- | --------------- |
+| 1             | HR              |
+
 ## Solution
 
 ### CSV to Parquet
@@ -330,3 +342,28 @@ processing approach for optimal results.
 *The Python script that generates the bar chart can be found [here](solution/part1/task4/plot.py).*
 
 ### Part 2
+
+#### Task 1
+
+- [Repartition Join](solution/part2/task1/repartition_join.py)
+  ```bash
+  Repartition Join Results:
+  (('R', u'3,Dustin Tureson,4'), ('L', u'1,Dep A'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'2,Dep B'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'3,Dep C'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'4,Dep D'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'5,Dep E'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'6,Dep F'))
+  (('R', u'3,Dustin Tureson,4'), ('L', u'7,Dep G'))
+  ```
+- [Broadcast Join](solution/part2/task1/broadcast_join.py)
+  ```bash
+  Broadcast Join Results:
+  (u'1,Elizabeth Jordan,7', u'1,Dep A')
+  (u'2,Nancy Blanchard,2', u'2,Dep B')
+  (u'3,Dustin Tureson,4', u'3,Dep C')
+  (u'4,Melissa Mcglone,7', u'4,Dep D')
+  (u'5,William Varela,7', u'5,Dep E')
+  (u'6,Timothy Minert,1', u'6,Dep F')
+  (u'7,Suzanne Adams,3', u'7,Dep G')
+  ```

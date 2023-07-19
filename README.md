@@ -1,9 +1,22 @@
-# DSIT Big Data Management Project
+# DSIT Big Data Management Final Project
 
-This is the final project for the Big Data Management course of the Data Science and Information Technologies M.Sc.
-program at the University of Athens.
+This repository hosts the final project for the **Data Science and Information Technologies M.Sc.** program at the
+**University of Athens**, demonstrating the implementation of **Apache Spark** for managing large datasets. Conducted
+during the Spring Semester of the 2022-2023 academic year, the project emphasizes on the following key components:
 
-## Project Description
+1. **RDDs and DataFrames:** We employ **Resilient Distributed Datasets (RDDs)** and *DataFrames** to handle a variety of
+   query challenges, providing a practical application of these data structures in the realm of big data.
+
+2. **Evaluation of Join Algorithms:** An in-depth evaluation and comparative analysis of various join algorithms are
+   conducted, scrutinizing their performance in different scenarios.
+
+For this project, we use a comprehensive movie dataset, which includes movie information, ratings, and genres. Queries
+are executed using both the **RDD API** and the **DataFrame/SQL API**, with each instance's execution times carefully
+recorded for subsequent analysis.
+
+In this repository, you'll find the source code, the execution outputs, and a thorough report detailing the project's
+methodology, execution, and findings. The project offers insights into big data management and the application of Apache
+Spark.
 
 The project description can be found [here](Project.pdf)
 
@@ -41,17 +54,17 @@ The project description can be found [here](Project.pdf)
 
 ## Clusters
 
-All the spark jobs were executed and timed in two different clusters:
+All the **Spark jobs** were executed and timed in *two different clusters*:
 
-- The cluster provided by the course in Okeanos
+- The cluster provided by the course in **Okeanos**
     - 2 node cluster with 2 cores and 4GB of RAM each
-- A local "cluster" with 1 node based on
-  the [Hortonworks Sandbox 2.6.5](https://www.cloudera.com/downloads/hortonworks-sandbox.html)
+- A local "cluster" with 1 node based on the [**Hortonworks Sandbox
+  2.6.5**](https://www.cloudera.com/downloads/hortonworks-sandbox.html)
     - 4 cores and 8GB of RAM
 
-The results found in the [output](output) folder are from the local cluster (with the only difference being the timing),
-but detailed timing details can be found in the timing evaluation sections or in the following files if you prefer raw
-data:
+The results found in the [output](output) folder are from the **Hortonworks Sandbox** (with the only difference being
+the timings), but detailed timing details (for execution in both clusters) can be found either below or in the timings
+section:
 
 - [Spark Execution Times Okeanos](../spark_execution_times_okeanos.json)
 - [Spark Execution Times Hortonworks](../spark_execution_times_hortonworks.json)
@@ -59,7 +72,7 @@ data:
 
 ## CSV to Parquet
 
-The Python script to convert the CSV files to Parquet files is [here](src/csv_to_parquet.py).
+The Python script to convert the **CSV files** to **Parquet** files is [here](src/csv_to_parquet.py).
 
 It can be run as follows:
 
@@ -67,8 +80,8 @@ It can be run as follows:
 spark-submit csv_to_parquet.py
 ```
 
-**Note:** _`ratings` couldn't be converted to Parquet in the local cluster due to resource limitations, thus the spark
-jobs that require it were executed only in the Okeanos cluster_
+**Note:** _`ratings` couldn't be converted to **Parquet** in the **Hortonworks Sandbox** due to resource limitations,
+thus the spark jobs that require it were executed only in the **Okeanos** cluster_
 
 ## Solutions
 
@@ -337,14 +350,14 @@ what the average rating was._
 - [Q2 DF Solution](src/DF/q2.py)
 - [Q2 DF Raw Output](output/DF/q2.txt)
 
-Unlike all the other Spark jobs, we weren't able to run this one on the Hortonworks cluster (on Parquet files) due to
-the `ratings` table being too large. It was run on:
+Unlike all the other Spark jobs, we weren't able to run this one on the **Hortonworks** cluster (on **Parquet** files)
+due to the `ratings` table being too large. It was run on:
 
-- CSV files on the Hortonworks cluster
-- Parquet files on the Okeanos cluster
-- CSV files on the Okeanos cluster
+- CSV files on the **Hortonworks** cluster
+- Parquet files on the **Okeanos** cluster
+- CSV files on the **Okeanos** cluster
 
-The raw output is from the Parquet files on the Okeanos cluster (unlike the other Spark jobs).
+The raw output is from the **Parquet** files run on the **Okeanos** cluster (unlike the other Spark jobs).
 
 |                                            | Value          |
 |--------------------------------------------|----------------|
@@ -525,23 +538,24 @@ _For every year print the average movie revenue._
 
 ![Execution Times](output/rdd_df_plot_hortonworks.png)
 
-In the Hortonworks Sandbox, a single-node cluster, the Map/Reduce - RDD API has shown superior performance for most of
-the queries. The only exception being Q2 where Spark SQL on csv files performs significantly better. Interestingly, the
-execution time for Q2 in the parquet format was not captured, so we cannot compare this to the other methods. This
-suggests that for smaller, single-node clusters, the traditional Map/Reduce paradigm can still be highly effective,
-possibly due to the lack of network overhead present in distributed systems.
+In the **Hortonworks Sandbox**, a *single-node cluster*, the **Map/Reduce - RDD API** has shown superior performance for
+most of the queries. The only exception being Q2 where **Spark SQL** on csv files performs significantly better.
+Interestingly, the execution time for Q2 in the **Parquet** format was not captured, so we cannot compare this to the
+other methods. This suggests that for smaller, single-node clusters, the traditional **Map/Reduce** can still be highly
+effective, possibly due to the lack of network overhead present in distributed systems.
 
-Moving to the Okeanos cluster, a distributed 2-node environment, we see a different picture. Although the execution
-times across all methods are generally higher, possibly due to the overhead of data communication between nodes, there's
-no one-size-fits-all solution. The best performing method varies depending on the specific query, suggesting that the
-optimal strategy may depend on the nature of the task at hand. Interestingly, we see the columnar format Parquet showing
-competitive times in several queries, hinting at the advantage of columnar storage in distributed big data processing.
+Moving to the **Okeanos** cluster, a *distributed 2-node environment*, we see a different picture. Although the
+execution times across all methods are generally higher, possibly due to the overhead of data communication between
+nodes, there's no one-size-fits-all solution. The best performing method varies depending on the specific query,
+suggesting that the optimal strategy may depend on the nature of the task at hand. Interestingly, we see the columnar
+format **Parquet** showing competitive times in several queries, hinting at the advantage of columnar storage in
+distributed big data processing.
 
 Comparing the two, it's clear that the architecture of the computing environment plays a critical role in Spark job
-performance. The Hortonworks Sandbox performs better with the current dataset size, but, it can be appreciated that this
-might not hold for larger datasets. The Okeanos cluster, although slower for these specific datasets, is potentially
-more scalable due to its distributed nature. This underlines the importance of choosing the right tools and strategies
-based on both the characteristics of the data and the specific computing environment.
+performance. The **Hortonworks Sandbox** performs better with the current dataset size, but, it can be appreciated that
+this might not hold for larger datasets. The **Okeanos** cluster, although slower for these specific datasets, is
+potentially more scalable due to its distributed nature. This underlines the importance of choosing the right tools and
+strategies based on both the characteristics of the data and the specific computing environment.
 
 *The Python script that generates the bar charts can be found [here](src/rdd_df_plot.py).*
 
@@ -675,11 +689,11 @@ based on both the characteristics of the data and the specific computing environ
 
 ### Part 2: _Task 2_
 
-For this task, we used the [query_optimizer_test](src/QUERY_OPTIMIZER/query_optimizer_test.py) script to test Spark's
-query optimizer. The script ran with query optimizer enabled and disabled. Sadly we were not able to get the timing for
-the Hortonworks Sandbox, as the `ratings` parquet file couldn't be generated due to resource constraints.
+For this task, we used the [query_optimizer_test](src/QUERY_OPTIMIZER/query_optimizer_test.py) script to test **Spark's
+query optimizer**. The script ran with query optimizer enabled and disabled. Sadly we were not able to get the timing
+for the **Hortonworks Sandbox**, as the `ratings` parquet file couldn't be generated due to resource constraints.
 
-The script was run on the Okeanos cluster and the results are as follows:
+The script was run on the **Okeanos** cluster and the results are as follows:
 
 #### Query Optimizer Enabled
 
@@ -697,20 +711,22 @@ The script was run on the Okeanos cluster and the results are as follows:
 ![Execution Time](output/query_optimizer_plot_okeanos.png)
 
 The difference in performance observed between the two runs is a direct consequence of the specific join algorithm that
-Apache Spark's Catalyst Optimizer chooses based on the configuration.
+**Apache Spark's Catalyst Optimizer** chooses based on the configuration.
 
-In the case when the join optimization is disabled by setting `spark.sql.autoBroadcastJoinThreshold = -1`, Spark resorts
-to using the sort-merge join algorithm. This algorithm involves sorting both datasets on the join keys before merging
-them together. Although sort-merge join might work effectively across large datasets, it necessitates additional
-computational overhead for sorting and shuffling of data across the network, leading to a slower overall execution time.
+In the case when the join optimization is **disabled** by setting `spark.sql.autoBroadcastJoinThreshold = -1`, **Spark**
+resorts to using the **sort-merge join algorithm**. This algorithm involves sorting both datasets on the join keys
+before merging them together. Although sort-merge join might work effectively across large datasets, it necessitates
+additional computational overhead for sorting and shuffling of data across the network, leading to a slower overall
+execution time.
 
-When the join optimization is enabled, the Catalyst Optimizer leverages the broadcast join algorithm. This strategy
-involves broadcasting the smaller dataframe (here, `movie_genres`, limited to _100 records_) to every executor node
-where the larger dataframe (`ratings`) is present. This approach removes the need for shuffling the larger dataframe
-across the network, rendering the join operation considerably faster and more efficient, particularly for smaller
-datasets.
+When the join optimization is **enabled**, the **Catalyst Optimizer** leverages the **broadcast join algorithm**. This
+strategy involves broadcasting the smaller dataframe (here, `movie_genres`, limited to _100 records_) to every executor
+node where the larger dataframe (`ratings`) is present. This approach removes the need for shuffling the larger
+dataframe across the network, rendering the join operation considerably faster and more efficient, particularly for
+smaller datasets.
 
-The SQL plans reveal the underlying strategies employed by Spark in each case. The disabled optimization plan shows sort
-and exchange hash partitioning operations, whereas the enabled optimization plan shows broadcast exchange operations.
+The **SQL plans** reveal the underlying strategies employed by **Spark** in each case. The disabled optimization plan
+shows sort and exchange hash partitioning operations, whereas the enabled optimization plan shows broadcast exchange
+operations.
 
 *The Python script that generates the bar chart can be found [here](src/query_optimizer_plot.py).*

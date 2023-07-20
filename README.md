@@ -96,6 +96,8 @@ hadoop fs -copyFromLocal * files
 hadoop fs -ls
 ```
 
+![hadoop fs -ls](output/hdfs.png)
+
 ### Part 1: _Task 2_
 
 #### Q1
